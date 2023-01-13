@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:myband_flutter/resources/auth_methods.dart';
+import 'package:myband_flutter/responsive/responsive_layout_screen.dart';
 import 'package:myband_flutter/utils/colors.dart';
 import 'package:myband_flutter/utils/utils.dart';
+import 'package:myband_flutter/responsive/mobile_screen_layout.dart';
+import 'package:myband_flutter/responsive/responsive_layout_screen.dart';
+import 'package:myband_flutter/responsive/web_screen_layout.dart';
 
 import '../widgets/text_field_input.dart';
+import 'login_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -38,12 +43,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
         password: _passwordController.text,
         username: _usernameController.text,
         role: _roleController.text);
-    if (res != "success") {
-      showSnackBar(res, context);
-    }
+
     setState(() {
       _isLoading = false;
     });
+
+    if (res != "success") {
+      showSnackBar(res, context);
+    } else {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => const ResponsiveLayout(
+            mobileScreenLayout: MobileScreenLayout(),
+            webScreenLayout: WebScreenLayout(),
+          ),
+        ),
+      );
+    }
+  }
+
+  void navigateToLogin() {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => const LoginScreen()));
   }
 
   @override
@@ -142,7 +163,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: navigateToLogin,
                     child: Container(
                       child: const Text(
                         "Sign Up",
