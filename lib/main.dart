@@ -2,12 +2,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:myband_flutter/providers/user_provider.dart';
 import 'package:myband_flutter/responsive/mobile_screen_layout.dart';
 import 'package:myband_flutter/responsive/responsive_layout_screen.dart';
 import 'package:myband_flutter/responsive/web_screen_layout.dart';
 import 'package:myband_flutter/screens/login_screen.dart';
 import 'package:myband_flutter/screens/signup_screen.dart';
 import 'package:myband_flutter/utils/colors.dart';
+import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,7 +35,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => UserProvider(),
+        ),
+      ],
+      child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'MyBand',
         theme: ThemeData.dark().copyWith(
@@ -67,6 +75,8 @@ class MyApp extends StatelessWidget {
             }
             return const LoginScreen();
           },
-        ),);
+        ),
+      ),
+    );
   }
 }
