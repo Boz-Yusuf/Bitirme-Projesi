@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:myband_flutter/resources/auth_methods.dart';
 import 'package:myband_flutter/responsive/responsive_layout_screen.dart';
 import 'package:myband_flutter/utils/colors.dart';
@@ -22,6 +24,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _roleController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
+  Uint8List? _profilePhoto;
   bool _isLoading = false;
 
   @override
@@ -42,7 +45,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
         email: _emailController.text,
         password: _passwordController.text,
         username: _usernameController.text,
-        role: _roleController.text);
+        role: _roleController.text,
+        file: _profilePhoto!);
 
     setState(() {
       _isLoading = false;
@@ -65,6 +69,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
   void navigateToLogin() {
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (context) => const LoginScreen()));
+  }
+
+  void selectImage() async {
+    Uint8List profilePhoto = await pickImage(ImageSource.gallery);
+    setState(() {
+      _profilePhoto = profilePhoto;
+    });
   }
 
   @override
@@ -94,11 +105,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               Stack(
                 children: [
-                  CircleAvatar(
-                    radius: 64,
-                    backgroundImage: NetworkImage(
-                        "https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"),
-                  ),
+                  _profilePhoto != null
+                      ? CircleAvatar(
+                          radius: 64,
+                          backgroundImage: MemoryImage(_profilePhoto!),
+                          backgroundColor: Colors.red,
+                        )
+                      : const CircleAvatar(
+                          radius: 64,
+                          backgroundImage: NetworkImage(
+                              'https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'),
+                          backgroundColor: Colors.red,
+                        ),
                   Positioned(
                       bottom: -10,
                       left: 80,
@@ -107,7 +125,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           Icons.camera,
                           color: Colors.white70,
                         ),
-                        onPressed: () {},
+                        onPressed: selectImage,
                       ))
                 ],
               ),

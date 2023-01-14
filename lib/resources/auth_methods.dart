@@ -4,6 +4,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:myband_flutter/models/user.dart' as model;
+import 'package:myband_flutter/resources/storage_methods.dart';
 
 class AuthMethods {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -22,6 +23,7 @@ class AuthMethods {
     required String password,
     required String username,
     required String role,
+    required Uint8List file,
   }) async {
     String res = "Some error Occurred";
     try {
@@ -34,13 +36,18 @@ class AuthMethods {
           email: email,
           password: password,
         );
+        String photoUrl = await StorageMethods()
+            .uploadImageToStorage('profilePics', file, false);
+
         model.User user = model.User(
           username: username,
           uid: cred.user!.uid,
           email: email,
           role: role,
+          photoUrl: photoUrl,
           connections: [],
         );
+
         // adding user in our database
         await _firestore
             .collection('users')

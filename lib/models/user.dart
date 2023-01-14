@@ -5,6 +5,7 @@ class User {
   final String email;
   final String uid;
   final String role;
+  final String photoUrl;
   final List connections;
 
   const User({
@@ -12,6 +13,7 @@ class User {
     required this.email,
     required this.uid,
     required this.role,
+    required this.photoUrl,
     required this.connections,
   });
 
@@ -20,6 +22,7 @@ class User {
         "email": email,
         "uid": uid,
         "role": role,
+        "photoUrl": photoUrl,
         "connections": connections
       };
 
@@ -31,6 +34,7 @@ class User {
         email: snapshot['email'],
         uid: snapshot['uid'],
         role: snapshot['role'],
+        photoUrl: snapshot["photoUrl"],
         connections: snapshot['connections']);
   }
 }
