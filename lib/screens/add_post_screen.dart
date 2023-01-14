@@ -20,6 +20,8 @@ class _AddPostScreenState extends State<AddPostScreen> {
   Uint8List? _file;
   final TextEditingController _descriptionController = TextEditingController();
 
+  void postImage(String uid, String username) {}
+
   _selectImage(BuildContext context) async {
     return showDialog(
         context: context,
@@ -63,6 +65,13 @@ class _AddPostScreenState extends State<AddPostScreen> {
             ],
           );
         });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _descriptionController.dispose();
   }
 
   @override

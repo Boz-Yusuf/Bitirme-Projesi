@@ -81,12 +81,38 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 child: Container(),
                 flex: 2,
               ),
+
               const Text(
                 "Sign Up",
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
+              ),
+              const SizedBox(
+                height: 24,
+              ),
+              Stack(
+                children: [
+                  CircleAvatar(
+                    radius: 64,
+                    backgroundImage: NetworkImage(
+                        "https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"),
+                  ),
+                  Positioned(
+                      bottom: -10,
+                      left: 80,
+                      child: IconButton(
+                        icon: const Icon(
+                          Icons.camera,
+                          color: Colors.white70,
+                        ),
+                        onPressed: () {},
+                      ))
+                ],
+              ),
+              const SizedBox(
+                height: 24,
               ),
               TextFieldInput(
                 hintText: "Enter Your User Name",
@@ -97,6 +123,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 height: 24,
               ),
               //text field iput for email
+
               TextFieldInput(
                 hintText: "Enter Your e-mail",
                 textInputType: TextInputType.emailAddress,
