@@ -6,6 +6,7 @@ import 'package:myband_flutter/resources/firestore_methods.dart';
 import 'package:myband_flutter/utils/colors.dart';
 import 'package:myband_flutter/widgets/like_animation.dart';
 import 'package:provider/provider.dart';
+import 'package:myband_flutter/screens/comment_screen.dart';
 
 class PostCard extends StatefulWidget {
   final snap;
@@ -133,20 +134,24 @@ class _PostCardState extends State<PostCard> {
                         widget.snap['uid'], widget.snap['likes']);
                   },
                   icon: widget.snap['likes'].contains(user.uid)
-                      ? Icon(Icons.arrow_upward_rounded,
+                      ? const Icon(Icons.arrow_upward_rounded,
                           color: Colors.blueAccent)
-                      : Icon(
+                      : const Icon(
                           Icons.arrow_upward_rounded,
                         ),
                 ),
               ),
               IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.comment_rounded),
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => CommentScreen(),
+                  ),
+                ),
+                icon: const Icon(Icons.comment_rounded),
               ),
               IconButton(
                 onPressed: () {},
-                icon: Icon(Icons.send_rounded),
+                icon: const Icon(Icons.send_rounded),
               ),
               Expanded(
                 child: Align(
