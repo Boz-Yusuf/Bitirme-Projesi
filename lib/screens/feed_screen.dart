@@ -48,16 +48,23 @@ class _FeedScreenState extends State<FeedScreen> {
               child: CircularProgressIndicator(),
             );
           }
+          // return ListView.builder(
+          //   itemCount: snapshot.data!.docs.length,
+          //   itemBuilder: (ctx, index) => Container(
+          //     margin: EdgeInsets.symmetric(
+          //       horizontal: width > webScreenSize ? width * 0.3 : 0,
+          //       vertical: width > webScreenSize ? 15 : 0,
+          //     ),
+          //     child: const PostCard(
+          //         //  snap: snapshot.data!.docs[index].data(),
+          //         ),
+          //   ),
+          // );
+
           return ListView.builder(
             itemCount: snapshot.data!.docs.length,
-            itemBuilder: (ctx, index) => Container(
-              margin: EdgeInsets.symmetric(
-                horizontal: width > webScreenSize ? width * 0.3 : 0,
-                vertical: width > webScreenSize ? 15 : 0,
-              ),
-              child: const PostCard(
-                  //  snap: snapshot.data!.docs[index].data(),
-                  ),
+            itemBuilder: (context, index) => PostCard(
+              snap: snapshot.data!.docs[index].data(),
             ),
           );
         },
