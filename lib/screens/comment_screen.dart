@@ -103,7 +103,7 @@ class _CommentScreenState extends State<CommentScreen> {
                   ),
                   child: const Text(
                     'Post',
-                    style: TextStyle(color: blueColor),
+                    style: TextStyle(color: primaryColor),
                   ),
                 ),
               )

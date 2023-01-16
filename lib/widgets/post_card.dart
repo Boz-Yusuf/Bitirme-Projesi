@@ -66,14 +66,15 @@ class _PostCardState extends State<PostCard> {
                 ),
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 8),
+                    padding: const EdgeInsets.only(left: 12),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           widget.snap['username'],
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16),
                         )
                       ],
                     ),
@@ -113,6 +114,22 @@ class _PostCardState extends State<PostCard> {
                   icon: const Icon(Icons.more_vert),
                 ),
               ],
+            ),
+          ),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+            child: RichText(
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                    text: widget.snap['description'],
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           //Image Section
@@ -165,7 +182,7 @@ class _PostCardState extends State<PostCard> {
                   },
                   icon: widget.snap['likes'].contains(user.uid)
                       ? const Icon(Icons.arrow_upward_rounded,
-                          color: Colors.blueAccent)
+                          color: primaryColor)
                       : const Icon(
                           Icons.arrow_upward_rounded,
                         ),
@@ -219,24 +236,6 @@ class _PostCardState extends State<PostCard> {
                   width: double.infinity,
                   padding: const EdgeInsets.only(
                     top: 8,
-                  ),
-                  child: RichText(
-                    text: TextSpan(
-                      style: const TextStyle(
-                        color: primaryColor,
-                      ),
-                      children: [
-                        TextSpan(
-                          text: widget.snap['username'],
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        TextSpan(
-                          text: widget.snap['description'],
-                        )
-                      ],
-                    ),
                   ),
                 ),
                 InkWell(
