@@ -243,7 +243,7 @@ class _PostCardState extends State<PostCard> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 4),
                     child: Text(
-                      'View all $commentLen comments',
+                      '$commentLen comments',
                       style: TextStyle(
                         fontSize: 16,
                         color: secondaryColor,

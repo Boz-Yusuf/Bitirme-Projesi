@@ -113,10 +113,16 @@ class _AddPostScreenState extends State<AddPostScreen> {
   Widget build(BuildContext context) {
     final User user = Provider.of<UserProvider>(context).getUser;
     return _file == null
-        ? Center(
-            child: IconButton(
-              icon: const Icon(Icons.upload),
-              onPressed: () => _selectImage(context),
+        ? Container(
+            width: double.infinity,
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("assets/post.png"), fit: BoxFit.cover)),
+            child: Center(
+              child: IconButton(
+                icon: const Icon(Icons.upload),
+                onPressed: () => _selectImage(context),
+              ),
             ),
           )
         : Scaffold(

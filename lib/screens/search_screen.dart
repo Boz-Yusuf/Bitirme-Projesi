@@ -71,6 +71,13 @@ class _SearchScreenState extends State<SearchScreen> {
                   );
                 },
               )
-            : Text("Find new bandmates"));
+            : Container(
+                width: double.infinity,
+                height: double.maxFinite,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage("assets/find.png"), fit: BoxFit.cover),
+                ),
+                child: Text("")));
   }
 }
