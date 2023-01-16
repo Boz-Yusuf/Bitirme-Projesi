@@ -126,7 +126,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                 icon: const Icon(Icons.arrow_back),
                 onPressed: () => clearImage(),
               ),
-              title: const Text("Post to"),
+              title: const Text("Discard"),
               centerTitle: false,
               actions: [
                 TextButton(
@@ -135,56 +135,64 @@ class _AddPostScreenState extends State<AddPostScreen> {
                     child: const Text(
                       "Post",
                       style: TextStyle(
-                          color: Colors.blueAccent,
+                          color: primaryColor,
                           fontWeight: FontWeight.bold,
                           fontSize: 16),
                     ))
               ],
             ),
-            body: Column(
-              children: [
-                _isLoading
-                    ? const LinearProgressIndicator()
-                    : const Padding(
-                        padding: EdgeInsets.only(top: 0),
-                      ),
-                const Divider(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CircleAvatar(
-                      backgroundImage: NetworkImage(user.photoUrl),
-                    ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.4,
-                      child: TextField(
-                        controller: _descriptionController,
-                        decoration: const InputDecoration(
-                          hintText: "Write a caption...",
-                          border: InputBorder.none,
+            body: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Divider(),
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Column(
+                      children: [
+                        // CircleAvatar(
+                        //   radius: 60,
+                        //   backgroundImage: NetworkImage(user.photoUrl),
+                        // ),
+                        SizedBox(
+                          height: 12,
                         ),
-                        maxLines: 12,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 45,
-                      width: 45,
-                      child: AspectRatio(
-                        aspectRatio: 487 / 451,
-                        child: Container(
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                            image: MemoryImage(_file!),
-                            fit: BoxFit.fill,
-                            alignment: FractionalOffset.topCenter,
-                          )),
+                        SizedBox(
+                          height: 350,
+                          width: 350,
+                          child: AspectRatio(
+                            aspectRatio: 487 / 451,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                image: MemoryImage(_file!),
+                                fit: BoxFit.fill,
+                                alignment: FractionalOffset.topCenter,
+                              )),
+                            ),
+                          ),
                         ),
-                      ),
-                    )
-                  ],
-                )
-              ],
+                        SizedBox(height: 8),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.9,
+                          child: TextField(
+                            controller: _descriptionController,
+                            decoration: const InputDecoration(
+                              hintText: "Write a caption...",
+                              border: InputBorder.none,
+                            ),
+                            maxLines: 12,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 12,
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
           );
   }
