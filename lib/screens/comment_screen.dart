@@ -39,6 +39,10 @@ class _CommentScreenState extends State<CommentScreen> {
             .collection('posts')
             .doc(widget.snap['postId'])
             .collection('comments')
+            .orderBy(
+              'datePublished',
+              descending: true,
+            )
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -49,8 +53,8 @@ class _CommentScreenState extends State<CommentScreen> {
           return ListView.builder(
             itemCount: (snapshot.data! as dynamic).docs.length,
             itemBuilder: (context, index) => CommentCard(
-                // snap: snapshot.data!.docs[index],
-                ),
+              snap: (snapshot.data! as dynamic).docs[index].data(),
+            ),
           );
         },
       ),
@@ -88,6 +92,9 @@ class _CommentScreenState extends State<CommentScreen> {
                     user.username,
                     user.photoUrl,
                   );
+                  setState(() {
+                    _commentController.text = "";
+                  });
                 },
                 child: Container(
                   padding: const EdgeInsets.symmetric(

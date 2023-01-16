@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class CommentCard extends StatefulWidget {
-  const CommentCard({super.key});
+  final snap;
+  const CommentCard({super.key, required this.snap});
 
   @override
   State<CommentCard> createState() => _CommentCardState();
@@ -19,7 +21,7 @@ class _CommentCardState extends State<CommentCard> {
         children: [
           CircleAvatar(
             backgroundImage: NetworkImage(
-              'https://media.istockphoto.com/id/1441502237/tr/foto%C4%9Fraf/happy-new-year-2023.jpg?s=612x612&w=0&k=20&c=A0_nngMNWBWnYU_gA3K-PDnDV3iAS3m74Mrgx-eSH5k=',
+              widget.snap['profilePic'],
             ),
             radius: 18,
           ),
@@ -36,12 +38,11 @@ class _CommentCardState extends State<CommentCard> {
                     text: TextSpan(
                       children: [
                         TextSpan(
-                          text: "username",
+                          text: widget.snap['name'],
                           style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                         TextSpan(
-                          text: "some description yo post",
-                          style: const TextStyle(fontWeight: FontWeight.bold),
+                          text: ' ${widget.snap['text']}',
                         ),
                       ],
                     ),
@@ -51,7 +52,8 @@ class _CommentCardState extends State<CommentCard> {
                       top: 4,
                     ),
                     child: Text(
-                      "23/11/23",
+                      DateFormat.yMMMd()
+                          .format(widget.snap['datePublished'].toDate()),
                       style: TextStyle(fontSize: 12),
                     ),
                   ),
@@ -60,9 +62,16 @@ class _CommentCardState extends State<CommentCard> {
             ),
           ),
           Container(
-            padding: const EdgeInsets.all(8),
-            child: const Icon(Icons.arrow_upward_rounded, size: 22),
-          )
+              padding: const EdgeInsets.all(8),
+              child: Row(
+                children: [
+                  const Icon(Icons.arrow_upward_rounded, size: 22),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  const Icon(Icons.arrow_downward_rounded, size: 22),
+                ],
+              ))
         ],
       ),
     );
