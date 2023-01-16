@@ -1,18 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:myband_flutter/models/user.dart';
+import 'package:myband_flutter/providers/user_provider.dart';
+import 'package:myband_flutter/resources/firestore_methods.dart';
 import 'package:myband_flutter/utils/colors.dart';
+import 'package:provider/provider.dart';
 
 import '../widgets/comment_card.dart';
 
 class CommentScreen extends StatefulWidget {
-  const CommentScreen({super.key});
+  final snap;
+  const CommentScreen({super.key, required this.snap});
 
   @override
   State<CommentScreen> createState() => _CommentScreenState();
 }
 
 class _CommentScreenState extends State<CommentScreen> {
+  final TextEditingController _commentController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    _commentController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final User user = Provider.of<UserProvider>(context).getUser;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: mobileBackgroundColor,
@@ -30,23 +44,31 @@ class _CommentScreenState extends State<CommentScreen> {
           child: Row(
             children: [
               CircleAvatar(
-                backgroundImage: NetworkImage(
-                    "https://images.unsplash.com/photo-1504654034213-87ab9a78aa12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YmF0ZXJpc3R8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"),
+                backgroundImage: NetworkImage(user.photoUrl),
                 radius: 18,
               ),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.only(left: 16.0, right: 8.0),
                   child: TextField(
+                    controller: _commentController,
                     decoration: InputDecoration(
-                      hintText: 'Comment as username',
+                      hintText: ' Comment as ${user.username}',
                       border: InputBorder.none,
                     ),
                   ),
                 ),
               ),
               InkWell(
-                onTap: () {},
+                onTap: () async {
+                  await FirestoreMethods().postComment(
+                    widget.snap['postId'],
+                    _commentController.text,
+                    user.uid,
+                    user.username,
+                    user.photoUrl,
+                  );
+                },
                 child: Container(
                   padding: const EdgeInsets.symmetric(
                     vertical: 8,
