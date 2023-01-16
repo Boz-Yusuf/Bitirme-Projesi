@@ -82,21 +82,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Container(
+        child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 32),
-          width: double.infinity,
+          // width: double.infinity,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Flexible(
-                child: Container(),
-                flex: 2,
-              ),
-
               const Text(
                 "Sign Up",
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 32,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -130,7 +125,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ],
               ),
               const SizedBox(
-                height: 24,
+                height: 16,
+              ),
+              Text(
+                'Please enter your information below in order to create a new account',
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(
+                height: 32,
               ),
               TextFieldInput(
                 hintText: "User Name",
@@ -188,21 +190,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           Radius.circular(4),
                         ),
                       ),
-                      color: blueColor),
+                      color: primaryColor),
                 ),
               ),
               const SizedBox(
                 height: 12,
               ),
-              Flexible(
-                child: Container(),
-                flex: 2,
-              ),
-              Row(
+
+              Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    child: const Text("Don't have an account"),
+                    child: const Text("Already have an account"),
                     padding: const EdgeInsets.symmetric(
                       vertical: 8,
                     ),
@@ -211,10 +210,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     onTap: navigateToLogin,
                     child: Container(
                       child: const Text(
-                        "Sign Up",
+                        "Log In",
                         style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
+                            fontWeight: FontWeight.bold, color: primaryColor),
                       ),
                       padding: const EdgeInsets.symmetric(
                         vertical: 8,
