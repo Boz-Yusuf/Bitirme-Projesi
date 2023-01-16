@@ -77,15 +77,25 @@ class _LoginScreenState extends State<LoginScreen> {
                 flex: 2,
               ),
               const Text(
-                "Sign In",
+                "LogIn Now",
                 style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1.5),
+              ),
+              SizedBox(
+                height: 24,
+              ),
+              Text(
+                'Please enter your information below in order to login your account',
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                height: 32,
               ),
               //text field iput for email
               TextFieldInput(
-                hintText: "Enter Your e-mail",
+                hintText: "Email",
                 textInputType: TextInputType.emailAddress,
                 textEditingController: _emailController,
               ),
@@ -94,13 +104,13 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               //text field iput for password
               TextFieldInput(
-                hintText: "Enter Your Password",
+                hintText: "Password",
                 textInputType: TextInputType.text,
                 isPass: true,
                 textEditingController: _passwordController,
               ),
               const SizedBox(
-                height: 24,
+                height: 16,
               ),
               //button login
               InkWell(
@@ -128,15 +138,12 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(
                 height: 12,
               ),
-              Flexible(
-                child: Container(),
-                flex: 2,
-              ),
-              Row(
+
+              Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    child: const Text("Don't have an account"),
+                    child: const Text("Don't have an account?"),
                     padding: const EdgeInsets.symmetric(
                       vertical: 8,
                     ),
@@ -147,8 +154,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: const Text(
                         "Sign Up",
                         style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
+                            fontWeight: FontWeight.bold, color: primaryColor),
                       ),
                       padding: const EdgeInsets.symmetric(
                         vertical: 8,
@@ -156,8 +162,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   )
                 ],
-              )
-              //transitioning to signing up
+              ),
+              Flexible(
+                child: Container(),
+                flex: 2,
+              ),
             ],
           ),
         ),

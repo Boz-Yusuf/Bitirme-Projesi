@@ -119,9 +119,18 @@ class _AddPostScreenState extends State<AddPostScreen> {
                 image: DecorationImage(
                     image: AssetImage("assets/post.png"), fit: BoxFit.cover)),
             child: Center(
-              child: IconButton(
-                icon: const Icon(Icons.upload),
-                onPressed: () => _selectImage(context),
+              child: Padding(
+                padding: const EdgeInsets.only(right: 100.0),
+                child: TextButton(
+                  child: Text(
+                    "Click To Share New Post",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 32,
+                    ),
+                  ),
+                  onPressed: () => _selectImage(context),
+                ),
               ),
             ),
           )
